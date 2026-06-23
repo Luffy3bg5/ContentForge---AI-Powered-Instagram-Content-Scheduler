@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ContentForge - Create, Organize & Schedule Instagram Content with AI</title>
+    <meta name="description" content="Generate captions, hashtags, image concepts, and music recommendations in minutes. Plan your content calendar and never miss a post with ContentForge.">
+    <!-- Google Fonts: Outfit -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Header Navigation -->
+    <header class="header">
+        <div class="container header-container">
+            <a href="#" class="logo">
+                <span class="logo-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275Z"/>
+                        <path d="m5 3 1 2.5L8.5 6 6 7 5 9.5 4 7 1.5 6 4 5.5Z"/>
+                        <path d="m19 17 1 2.5 2.5.5-2.5 1-1 2.5-1-2.5-2.5-1 2.5-1Z"/>
+                    </svg>
+                </span>
+                <span>ContentForge</span>
+            </a>
+            
+            <nav class="nav-links">
+                <a href="#features">Features</a>
+                <a href="#how-it-works">How It Works</a>
+                <a href="#pricing">Pricing</a>
+                <a href="#contact">Contact</a>
+            </nav>
+
+            <div class="nav-actions">
+                <a href="#" class="btn-text login-btn">Login</a>
+                <button class="btn btn-primary get-started-btn">Get Started</button>
+            </div>
+
+            <!-- Hamburger Button -->
+            <button class="hamburger-menu" id="hamburger-toggle" aria-label="Toggle Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Mobile Nav Overlay -->
+    <div class="mobile-nav" id="mobile-nav-overlay">
+        <nav class="mobile-nav-links">
+            <a href="#features">Features</a>
+            <a href="#how-it-works">How It Works</a>
+            <a href="#pricing">Pricing</a>
+            <a href="#contact">Contact</a>
+            <div class="mobile-actions">
+                <a href="#" class="btn-text login-btn">Login</a>
+                <button class="btn btn-primary get-started-btn">Get Started</button>
+            </div>
+        </nav>
+    </div>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <div class="container hero-container">
+                <!-- Hero Left Content -->
+                <div class="hero-content">
+                    <div class="badge-wrapper">
+                        <span class="badge-badge">
+                            <span class="badge-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275Z"/>
+                                </svg>
+                            </span>
+                            AI-powered content workflow
+                        </span>
+                    </div>
+
+                    <h1>Create, Organize &<br>Schedule Instagram<br>Content with AI</h1>
+                    <p class="subtitle-text">
+                        Generate captions, hashtags, image concepts, and music recommendations in minutes. Plan your content calendar and never miss a post.
+                    </p>
+
+                    <div class="cta-group">
+                        <button class="btn btn-primary btn-glow" id="cta-start-creating">Start Creating Free</button>
+                        <button class="btn btn-secondary" id="cta-watch-demo">
+                            <span class="play-icon">
+                                <svg viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M8 5v14l11-7z"/>
+                                </svg>
+                            </span>
+                            Watch Demo
+                        </button>
+                    </div>
+
+                    <div class="hero-meta">
+                        <span class="meta-item">
+                            <span class="check-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                                    <polyline points="20 6 9 17 4 12"/>
+                                </svg>
+                            </span>
+                            No credit card required
+                        </span>
+                        <span class="meta-dot">&bull;</span>
+                        <span class="meta-item">Free 14-day trial</span>
+                    </div>
+                </div>
+
+                <!-- Hero Right Mockup Panel -->
+                <div class="hero-mockup-wrapper">
+                    <!-- Glassmorphism Container Card -->
+                    <div class="mockup-main-card">
+                        
+                        <!-- AI Caption Generator Card -->
+                        <div class="mockup-card caption-card" id="mockup-caption-card">
+                            <div class="card-header">
+                                <div class="icon-box purple-bg">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="sparkle-svg">
+                                        <path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275Z"/>
+                                    </svg>
+                                </div>
+                                <span class="card-title">AI Caption Generator</span>
+                            </div>
+                            <div class="card-body">
+                                <p class="caption-text" id="sim-caption">Slow mornings & good coffee. Taking it one sip at a time today. What's fueling your Monday?</p>
+                                <div class="hashtags-list" id="sim-hashtags">
+                                    <span class="tag">#coffeelover</span>
+                                    <span class="tag">#slowliving</span>
+                                    <span class="tag">#mondaymood</span>
+                                    <span class="tag">#cafevibes</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Image Display Card -->
+                        <div class="mockup-image-card" id="mockup-image-card">
+                            <img src="assets/images/coffee.png" alt="Aesthetic coffee and journal concept" id="sim-image">
+                            <div class="image-loader" id="sim-image-loader">
+                                <div class="spinner"></div>
+                            </div>
+                        </div>
+
+                        <!-- Schedule Card -->
+                        <div class="mockup-card schedule-card" id="mockup-schedule-card">
+                            <div class="card-header">
+                                <span class="schedule-icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <rect width="18" height="18" x="3" y="4" rx="2" ry="2"/>
+                                        <line x1="16" x2="16" y1="2" y2="6"/>
+                                        <line x1="8" x2="8" y1="2" y2="6"/>
+                                        <line x1="3" x2="21" y1="10" y2="10"/>
+                                    </svg>
+                                </span>
+                                <span class="card-title">Schedule</span>
+                            </div>
+                            <div class="schedule-list">
+                                <div class="schedule-item active" id="sched-mon" data-day="Mon" data-time="9:00 AM">
+                                    <span class="day">Mon</span>
+                                    <span class="time">9:00 AM</span>
+                                </div>
+                                <div class="schedule-item" id="sched-wed" data-day="Wed" data-time="6:30 PM">
+                                    <span class="day">Wed</span>
+                                    <span class="time">6:30 PM</span>
+                                </div>
+                                <div class="schedule-item" id="sched-fri" data-day="Fri" data-time="12:00 PM">
+                                    <span class="day">Fri</span>
+                                    <span class="time">12:00 PM</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Success Pill Pop -->
+                        <div class="mockup-success-pill" id="mockup-success-pill">
+                            <div class="check-circle">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                                    <polyline points="20 6 9 17 4 12"/>
+                                </svg>
+                            </div>
+                            <div class="pill-text">
+                                <strong class="published-title">Post Published</strong>
+                                <span class="likes-sub">+128 likes in 1 hour</span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="section features-section" id="features">
+            <div class="container text-center">
+                <span class="section-tag">FEATURES</span>
+                <h2>Everything you need to grow on Instagram</h2>
+                <p class="section-subtitle">
+                    A complete AI toolkit to ideate, create, and publish content that performs.
+                </p>
+
+                <div class="grid-2x2">
+                    <!-- Feature Card 1 -->
+                    <div class="feature-card">
+                        <div class="icon-container">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 20h9"/>
+                                <path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/>
+                            </svg>
+                        </div>
+                        <h3>AI Caption Generator</h3>
+                        <p>Generate engaging Instagram captions instantly, tailored to your brand voice and audience.</p>
+                    </div>
+
+                    <!-- Feature Card 2 -->
+                    <div class="feature-card">
+                        <div class="icon-container">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="4" x2="20" y1="9" y2="9"/>
+                                <line x1="4" x2="20" y1="15" y2="15"/>
+                                <line x1="10" x2="8" y1="3" y2="21"/>
+                                <line x1="16" x2="14" y1="3" y2="21"/>
+                            </svg>
+                        </div>
+                        <h3>Smart Hashtags</h3>
+                        <p>Get niche-specific hashtag suggestions that boost reach and discovery on every post.</p>
+                    </div>
+
+                    <!-- Feature Card 3 -->
+                    <div class="feature-card">
+                        <div class="icon-container">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect width="18" height="18" x="3" y="3" rx="2" ry="2"/>
+                                <circle cx="9" cy="9" r="2"/>
+                                <path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/>
+                            </svg>
+                        </div>
+                        <h3>AI Image Generation</h3>
+                        <p>Create post-ready visuals from simple prompts — no design skills required.</p>
+                    </div>
+
+                    <!-- Feature Card 4 -->
+                    <div class="feature-card">
+                        <div class="icon-container">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 7.5V6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h3.5"/>
+                                <path d="M16 2v4"/>
+                                <path d="M8 2v4"/>
+                                <path d="M3 10h5"/>
+                                <circle cx="18" cy="16" r="5"/>
+                                <path d="M18 13v3l2 2"/>
+                            </svg>
+                        </div>
+                        <h3>Content Scheduling</h3>
+                        <p>Schedule posts across your calendar and receive smart reminders so you never miss a beat.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- How It Works & Stats Section -->
+        <section class="section how-it-works-section" id="how-it-works">
+            <div class="container text-center">
+                <span class="section-tag">HOW IT WORKS</span>
+                <h2>From idea to published in 4 steps</h2>
+
+                <!-- Steps List -->
+                <div class="steps-flow">
+                    <!-- Step 1 -->
+                    <div class="step-card" id="step-1" data-step="1">
+                        <div class="step-badge">Step 1</div>
+                        <div class="step-icon-container">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A5 5 0 0 0 8 8c0 1 .3 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/>
+                                <path d="M9 18h6"/>
+                                <path d="M10 22h4"/>
+                            </svg>
+                        </div>
+                        <h3>Enter Content Idea</h3>
+                        <p>Start with a simple topic or idea for your next post.</p>
+                    </div>
+
+                    <div class="step-connector">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>
+                        </svg>
+                    </div>
+
+                    <!-- Step 2 -->
+                    <div class="step-card" id="step-2" data-step="2">
+                        <div class="step-badge">Step 2</div>
+                        <div class="step-icon-container">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275Z"/>
+                            </svg>
+                        </div>
+                        <h3>Generate Caption & Hashtags</h3>
+                        <p>AI writes a caption and picks the perfect hashtags.</p>
+                    </div>
+
+                    <div class="step-connector">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>
+                        </svg>
+                    </div>
+
+                    <!-- Step 3 -->
+                    <div class="step-card" id="step-3" data-step="3">
+                        <div class="step-badge">Step 3</div>
+                        <div class="step-icon-container">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect width="18" height="18" x="3" y="3" rx="2" ry="2"/>
+                                <circle cx="9" cy="9" r="2"/>
+                                <path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/>
+                            </svg>
+                        </div>
+                        <h3>Create AI Image</h3>
+                        <p>Turn your prompt into a scroll-stopping visual.</p>
+                    </div>
+
+                    <div class="step-connector">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>
+                        </svg>
+                    </div>
+
+                    <!-- Step 4 -->
+                    <div class="step-card" id="step-4" data-step="4">
+                        <div class="step-badge">Step 4</div>
+                        <div class="step-icon-container">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/>
+                            </svg>
+                        </div>
+                        <h3>Schedule & Publish</h3>
+                        <p>Pick a time and let ContentForge post it for you.</p>
+                    </div>
+                </div>
+
+                <!-- Stats Counters Container -->
+                <div class="stats-row">
+                    <div class="stat-card">
+                        <h4 class="stat-num" data-target="50000">0</h4>
+                        <p class="stat-label">Captions Generated</p>
+                    </div>
+                    <div class="stat-card">
+                        <h4 class="stat-num" data-target="10000">0</h4>
+                        <p class="stat-label">Posts Scheduled</p>
+                    </div>
+                    <div class="stat-card">
+                        <h4 class="stat-num" data-target="500">0</h4>
+                        <p class="stat-label">Creators Using ContentForge</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials Section -->
+        <section class="section testimonials-section" id="testimonials">
+            <div class="container text-center">
+                <span class="section-tag">TESTIMONIALS</span>
+                <h2>Loved by creators everywhere</h2>
+
+                <div class="testimonials-grid">
+                    <!-- Testimonial 1 -->
+                    <div class="testimonial-card">
+                        <div class="stars">
+                            <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                        </div>
+                        <p class="quote">
+                            "ContentForge cut my content planning time in half. The AI captions actually sound like me, and the hashtag suggestions doubled my reach."
+                        </p>
+                        <div class="creator-profile">
+                            <img src="assets/images/avatar_maya.png" alt="Maya Chen Profile Picture" class="avatar">
+                            <div class="creator-info">
+                                <span class="creator-name">Maya Chen</span>
+                                <span class="creator-title">Lifestyle Creator &bull; 240K followers</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Testimonial 2 -->
+                    <div class="testimonial-card">
+                        <div class="stars">
+                            <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                        </div>
+                        <p class="quote">
+                            "The image generation is a game changer. I can go from idea to a fully scheduled post in minutes without ever opening a design tool."
+                        </p>
+                        <div class="creator-profile">
+                            <img src="assets/images/avatar_daniel.png" alt="Daniel Reyes Profile Picture" class="avatar">
+                            <div class="creator-info">
+                                <span class="creator-name">Daniel Reyes</span>
+                                <span class="creator-title">Travel Photographer &bull; 180K followers</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Testimonial 3 -->
+                    <div class="testimonial-card">
+                        <div class="stars">
+                            <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                        </div>
+                        <p class="quote">
+                            "Scheduling and reminders keep my feed consistent even on my busiest weeks. ContentForge feels like having a content team in my pocket."
+                        </p>
+                        <div class="creator-profile">
+                            <img src="assets/images/avatar_sofia.png" alt="Sofia Alvarez Profile Picture" class="avatar">
+                            <div class="creator-info">
+                                <span class="creator-name">Sofia Alvarez</span>
+                                <span class="creator-title">Wellness Coach &bull; 95K followers</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Pre-footer -->
+        <section class="section prefooter-section" id="pricing">
+            <div class="container text-center">
+                <h2>Ready to forge scroll-stopping content?</h2>
+                <p>Join thousands of creators who save hours every single week.</p>
+                <div class="cta-prefooter-buttons">
+                    <button class="btn btn-primary btn-glow get-started-btn">Get Started Now</button>
+                    <a href="#how-it-works" class="btn btn-secondary">Learn More</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer" id="contact">
+        <div class="container footer-container">
+            <div class="footer-brand">
+                <a href="#" class="logo">
+                    <span class="logo-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                            <path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275Z"/>
+                        </svg>
+                    </span>
+                    <span>ContentForge</span>
+                </a>
+                <p>Empowering creators with intuitive, AI-driven social design tools.</p>
+            </div>
+            <div class="footer-links-grid">
+                <div>
+                    <h5>Product</h5>
+                    <a href="#features">Features</a>
+                    <a href="#pricing">Pricing</a>
+                    <a href="#">Roadmap</a>
+                </div>
+                <div>
+                    <h5>Company</h5>
+                    <a href="#">About Us</a>
+                    <a href="#">Careers</a>
+                    <a href="#contact">Contact</a>
+                </div>
+                <div>
+                    <h5>Resources</h5>
+                    <a href="#">Help Center</a>
+                    <a href="#">Blog</a>
+                    <a href="#">API Documentation</a>
+                </div>
+            </div>
+        </div>
+        <div class="container footer-bottom">
+            <p>&copy; 2026 ContentForge. All rights reserved.</p>
+            <div class="footer-socials">
+                <a href="#" aria-label="Instagram">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+                </a>
+                <a href="#" aria-label="Twitter">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/></svg>
+                </a>
+                <a href="#" aria-label="LinkedIn">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- INTERACTIVE MODAL: AI Sandbox Workspace -->
+    <div class="modal-overlay" id="sandbox-modal">
+        <div class="modal-container sandbox-container">
+            <button class="modal-close-btn" id="close-sandbox" aria-label="Close Modal">&times;</button>
+            <div class="modal-grid">
+                
+                <!-- Left panel: Form generator -->
+                <div class="sandbox-generator-panel">
+                    <div class="sandbox-header">
+                        <span class="sandbox-badge">AI WORKSPACE</span>
+                        <h2>Create Your Post</h2>
+                        <p>Type an idea to watch ContentForge generate the post content, hashtag set, layout images, and publication schedule.</p>
+                    </div>
+
+                    <form id="sandbox-generator-form" class="generator-form">
+                        <div class="form-group">
+                            <label for="post-idea">What is your post about?</label>
+                            <textarea id="post-idea" placeholder="e.g., A slow Sunday morning sipping coffee and writing in a journal" required></textarea>
+                            <div class="suggestion-tag-list">
+                                <button type="button" class="suggestion-tag-btn">Cozy coffee vibe</button>
+                                <button type="button" class="suggestion-tag-btn">Coding late night</button>
+                                <button type="button" class="suggestion-tag-btn">Morning workout routine</button>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="post-tone">Caption Tone</label>
+                                <select id="post-tone">
+                                    <option value="aesthetic">Cozy & Aesthetic</option>
+                                    <option value="energetic">Energetic & Inspiring</option>
+                                    <option value="professional">Professional & Informative</option>
+                                    <option value="casual">Casual & Relaxed</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="post-image-style">Image Theme</label>
+                                <select id="post-image-style">
+                                    <option value="coffee">Cozy Cafe / Latte Art</option>
+                                    <option value="tech">Workspace / Coding Setup</option>
+                                    <option value="nature">Nature / Morning Sunshine</option>
+                                    <option value="fitness">Active Lifestyle / Gym Workout</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-block btn-glow" id="sandbox-submit-btn">
+                            Generate Post Preview
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Right panel: Live Preview Mockup -->
+                <div class="sandbox-preview-panel">
+                    <div class="preview-header">
+                        <span>LIVE PREVIEW</span>
+                        <div class="preview-badge-status" id="preview-status-badge">Draft</div>
+                    </div>
+
+                    <!-- Replica of the mockup main card -->
+                    <div class="mockup-main-card preview-replica">
+                        
+                        <!-- Caption replica -->
+                        <div class="mockup-card caption-card">
+                            <div class="card-header">
+                                <div class="icon-box purple-bg">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275Z"/>
+                                    </svg>
+                                </div>
+                                <span class="card-title">AI Caption Generator</span>
+                            </div>
+                            <div class="card-body">
+                                <p class="caption-text" id="preview-caption">Enter an idea on the left and click generate to forge your caption...</p>
+                                <div class="hashtags-list" id="preview-hashtags">
+                                    <!-- Dynamic hashtags -->
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Image replica -->
+                        <div class="mockup-image-card">
+                            <img src="assets/images/coffee.png" alt="Generated post concept" id="preview-image">
+                            <div class="image-loader" id="preview-image-loader">
+                                <div class="spinner"></div>
+                            </div>
+                        </div>
+
+                        <!-- Schedule replica -->
+                        <div class="mockup-card schedule-card">
+                            <div class="card-header">
+                                <span class="schedule-icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <rect width="18" height="18" x="3" y="4" rx="2" ry="2"/>
+                                        <line x1="16" x2="16" y1="2" y2="6"/>
+                                        <line x1="8" x2="8" y1="2" y2="6"/>
+                                        <line x1="3" x2="21" y1="10" y2="10"/>
+                                    </svg>
+                                </span>
+                                <span class="card-title">Schedule</span>
+                            </div>
+                            <div class="schedule-list">
+                                <div class="schedule-item active" id="preview-sched-item">
+                                    <span class="day">Mon</span>
+                                    <span class="time">9:00 AM</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Success Pill Pop -->
+                        <div class="mockup-success-pill" id="preview-success-pill">
+                            <div class="check-circle">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                                    <polyline points="20 6 9 17 4 12"/>
+                                </svg>
+                            </div>
+                            <div class="pill-text">
+                                <strong class="published-title">Post Scheduled!</strong>
+                                <span class="likes-sub" id="success-schedule-time">Active on calendar</span>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Actions for simulated workspace -->
+                    <div class="sandbox-preview-actions" id="sandbox-actions-wrapper">
+                        <div class="schedule-selector-row">
+                            <label for="sched-day">Select Slot:</label>
+                            <select id="sched-day">
+                                <option value="Monday 9:00 AM">Mon 9:00 AM</option>
+                                <option value="Wednesday 6:30 PM">Wed 6:30 PM</option>
+                                <option value="Friday 12:00 PM">Fri 12:00 PM</option>
+                            </select>
+                        </div>
+                        <button type="button" class="btn btn-secondary btn-block disabled" id="sandbox-schedule-btn" disabled>
+                            Schedule Post
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- INTERACTIVE MODAL: Demo Tour Video -->
+    <div class="modal-overlay" id="demo-modal">
+        <div class="modal-container demo-container">
+            <button class="modal-close-btn" id="close-demo" aria-label="Close Modal">&times;</button>
+            <div class="demo-tour-wrapper">
+                <div class="demo-sidebar">
+                    <h3>Explore Features</h3>
+                    <div class="tour-steps-list">
+                        <button class="tour-step-tab active" data-tour-index="0">
+                            <span class="num">1</span>
+                            <span>Caption Workspace</span>
+                        </button>
+                        <button class="tour-step-tab" data-tour-index="1">
+                            <span class="num">2</span>
+                            <span>Visual Studio</span>
+                        </button>
+                        <button class="tour-step-tab" data-tour-index="2">
+                            <span class="num">3</span>
+                            <span>Smart Scheduler</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="demo-main-view">
+                    <!-- Slide 1 -->
+                    <div class="tour-slide active" data-slide-index="0">
+                        <div class="tour-media">
+                            <!-- Visual depiction of caption generation -->
+                            <div class="caption-demo-box">
+                                <div class="user-prompt">"A caption for an organic skincare product launch"</div>
+                                <div class="ai-typing-effect">🌿 Redefining beauty, naturally. We are thrilled to introduce our new Clean Botanical Elixir. Crafted with organic jojoba, cold-pressed rosehip, and pure chamomile extract to restore your skin's natural radiance.</div>
+                                <div class="demo-tags">#organicbeauty #skincare #cleanbeauty #naturalskincare</div>
+                            </div>
+                        </div>
+                        <h4>AI-Powered Caption Generation</h4>
+                        <p>Say goodbye to writer's block. Select a tone, input a theme, and receive high-converting, personalized Instagram captions instantly.</p>
+                    </div>
+
+                    <!-- Slide 2 -->
+                    <div class="tour-slide" data-slide-index="1">
+                        <div class="tour-media">
+                            <div class="image-demo-box">
+                                <img src="assets/images/coffee.png" alt="visual rendering" class="image-preview-large">
+                                <div class="image-style-badge">Aesthetic Warm</div>
+                            </div>
+                        </div>
+                        <h4>Visual Asset Generation</h4>
+                        <p>Turn text concepts into stunning, post-ready visuals optimized for Instagram. Style filters make sure your grid stays on brand.</p>
+                    </div>
+
+                    <!-- Slide 3 -->
+                    <div class="tour-slide" data-slide-index="2">
+                        <div class="tour-media">
+                            <div class="calendar-demo-box">
+                                <div class="calendar-header">June 2026</div>
+                                <div class="calendar-grid">
+                                    <div class="day-header">M</div><div class="day-header">T</div><div class="day-header">W</div><div class="day-header">T</div><div class="day-header">F</div><div class="day-header">S</div><div class="day-header">S</div>
+                                    <div class="day-cell muted">25</div><div class="day-cell muted">26</div><div class="day-cell muted">27</div><div class="day-cell muted">28</div><div class="day-cell muted">29</div><div class="day-cell muted">30</div><div class="day-cell muted">31</div>
+                                    <div class="day-cell">1</div><div class="day-cell">2</div><div class="day-cell">3</div><div class="day-cell">4</div><div class="day-cell active-slot">5<div class="post-dot"></div></div><div class="day-cell">6</div><div class="day-cell">7</div>
+                                </div>
+                                <div class="scheduler-pill-demo">
+                                    <span>Scheduled: Monday 9:00 AM</span>
+                                    <span class="status-indicator">Ready</span>
+                                </div>
+                            </div>
+                        </div>
+                        <h4>Seamless Multi-Channel Scheduling</h4>
+                        <p>Set dates, select peak-engagement times, and let ContentForge auto-publish directly to your Instagram profile.</p>
+                    </div>
+
+                    <div class="tour-controls">
+                        <button class="btn btn-secondary" id="tour-prev-btn" disabled>Back</button>
+                        <button class="btn btn-primary" id="tour-next-btn">Next Step</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script Entry -->
+    <script src="app.js"></script>
+</body>
+</html>
