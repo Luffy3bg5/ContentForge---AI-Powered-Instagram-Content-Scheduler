@@ -100,4 +100,39 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    async  function  loadDashboard(){
+        try{
+            const  response  = await fetch("http://localhost:5000/api/posts" , {
+                headers :{
+                    Authorization : `Bearer ${token}`
+                }
+            });
+
+            const data  =  await response.json() ;
+
+            if(!data.success) return ;
+
+            const posts = data.posts;
+
+            //Statistics 
+            const  drafts = posts.filter(post=> post.status == "draft").length ;
+
+
+            const scheduled = posts.filter(post => post.status === "scheduled").length ;
+
+            const ready = posts.filter(post => post.status === "ready").length ;
+
+            const posted = posts.filter(post => post.status === "posted").length ;
+
+            document.getElementById("draftCount").textContent = drafts;
+            document.getElementById("scheduledCount").textContent = scheduled ;
+            document.getElementById("readyCount").textContent = ready;
+            document.getElementById("postedCount").textContent = posted;
+                    }
+            catch(error){
+                console.error(error);
+                
+        }
+    }
+        loadDashboard();
 });
