@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | ContentForge</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../css/auth.css">
+</head>
+
+<body class="login-page">
+
+<div class="layout-container">
+
+    <!-- ===========================
+         LEFT BRANDING PANEL
+    ============================ -->
+
+    <div class="panel-left">
+
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+
+        <div class="brand-content">
+
+            <div class="brand-badge">
+                AI Powered Content Workflow
+            </div>
+
+            <h1 class="brand-title">
+                Create <br>
+                Organize <br>
+                Schedule
+            </h1>
+
+            <p class="brand-desc">
+                Generate captions, hashtags, AI images, schedule posts,
+                and grow consistently using AI.
+            </p>
+
+            <div class="dashboard-preview">
+
+                <div class="dash-card">
+
+                    <div class="dash-header">
+                        ✨ AI Caption Generator
+                    </div>
+
+                    <p class="dash-text">
+                        Excited to announce our new feature drop today!
+                        Revolutionizing how you manage content 🚀
+                    </p>
+
+                    <div class="dash-chips">
+                        <span class="chip">#AI</span>
+                        <span class="chip">#Growth</span>
+                        <span class="chip">#Content</span>
+                    </div>
+
+                    <div class="dash-image-placeholder">
+                        Generated Image Preview
+                    </div>
+
+                </div>
+
+                <div class="dash-row">
+
+                    <div class="dash-card dash-col">
+
+                        <div class="dash-header">
+                            Schedule
+                        </div>
+
+                        <div class="dash-text">
+                            Monday
+                        </div>
+
+                        <div class="dash-status">
+                            Ready • 9:00 AM
+                        </div>
+
+                    </div>
+
+                    <div class="dash-card dash-col">
+
+                        <div class="dash-header">
+                            Analytics
+                        </div>
+
+                        <div class="dash-value">
+                            +128 Likes
+                        </div>
+
+                        <div class="trend-up">
+                            ↑ 14.5%
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- ===========================
+         RIGHT AUTH PANEL
+    ============================ -->
+
+    <div class="panel-right">
+
+        <div class="auth-container">
+
+            <div class="auth-header">
+
+                <h2>Welcome Back</h2>
+
+                <p>
+                    Sign in to continue using ContentForge.
+                </p>
+
+            </div>
+
+            <!-- GOOGLE BUTTON -->
+
+            <button class="btn-google" type="button">
+
+                <img src="../assets/images/google-logo.png" width="20" alt="Google">
+
+                Continue with Google
+
+            </button>
+
+            <div class="divider">
+                OR
+            </div>
+
+            <form id="authForm">
+
+                <!-- EMAIL -->
+
+                <div class="input-group">
+
+                    <input
+                        type="email"
+                        id="email"
+                        placeholder=" "
+                        required>
+
+                    <label for="email">
+                        Email Address
+                    </label>
+
+                    <small
+                        class="error-message"
+                        id="emailError">
+                    </small>
+
+                </div>
+
+                <!-- PASSWORD -->
+
+                <div class="input-group">
+
+                    <input
+                        type="password"
+                        id="password"
+                        placeholder=" "
+                        required>
+
+                    <label for="password">
+                        Password
+                    </label>
+
+                    <button
+                        type="button"
+                        class="password-toggle"
+                        id="togglePassword">
+
+                        👁
+
+                    </button>
+
+                    <small
+                        class="error-message"
+                        id="passwordError">
+                    </small>
+
+                </div>
+
+                <!-- OPTIONS -->
+
+                <div class="auth-options">
+
+                    <label class="checkbox-group">
+
+                        <input
+                            type="checkbox"
+                            id="rememberMe">
+
+                        Remember Me
+
+                    </label>
+
+                    <a
+                        href="#"
+                        class="forgot-link">
+
+                        Forgot Password?
+
+                    </a>
+
+                </div>
+
+                <!-- LOGIN BUTTON -->
+
+                <button
+                    class="btn-primary"
+                    id="submitBtn"
+                    type="submit">
+
+                    <span class="btn-text">
+                        Sign In
+                    </span>
+
+                    <span class="btn-loader"></span>
+
+                </button>
+
+            </form>
+
+            <div class="auth-footer-text">
+
+                Don't have an account?
+
+                <a href="register.html">
+
+                    Create Account
+
+                </a>
+
+            </div>
+
+        </div>
+
+        <footer class="page-footer">
+
+            <div>
+                © 2026 ContentForge
+            </div>
+
+            <div class="page-footer-links">
+
+                <a href="#">Privacy Policy</a>
+
+                <a href="#">Terms</a>
+
+            </div>
+
+        </footer>
+
+    </div>
+
+</div>
+
+<script src="../js/auth.js"></script>
+
+</body>
+</html>
