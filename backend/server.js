@@ -1,15 +1,18 @@
 const express = require("express");
 const dotenv = require("dotenv");
+
+dotenv.config();
+
 const cors = require("cors");
 
 const connectDB = require("./config/db");
 const postRoutes = require("./routes/postRoutes");
-
+const aiRoutes = require("./routes/aiRoutes");
 // Load environment variables
-dotenv.config();
 
 // Connect to MongoDB
 connectDB();
+
 
 const app = express();
 
@@ -26,10 +29,16 @@ app.use(express.json());
 // Parse URL-encoded request bodies
 app.use(express.urlencoded({ extended: true }));
 
-app.use("/api/posts", postRoutes);
+
 // ==========================
 // Routes
 // ==========================
+
+app.use("/api/posts", postRoutes);
+
+app.use("/api/ai", aiRoutes);
+
+app.use("/api/auth", require("./routes/authRoutes"));
 
 // Root Route
 app.get("/", (req, res) => {
@@ -40,7 +49,6 @@ app.get("/", (req, res) => {
 });
 
 // Authentication Routes
-app.use("/api/auth", require("./routes/authRoutes"));
 
 // ==========================
 // 404 Handler
