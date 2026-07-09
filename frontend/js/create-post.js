@@ -75,6 +75,75 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    async function loadDraft() {
+    
+    const token = localStorage.getItem("token");
+    const postId = localStorage.getItem(
+
+        "currentPostId"
+
+    );
+
+    if (!postId) return;
+
+    try {
+
+        const response = await fetch(
+
+            `http://localhost:5000/api/posts/${postId}`,
+
+            {
+
+                headers: {
+
+                    Authorization:
+
+                        `Bearer ${token}`
+
+                }
+
+            }
+
+        );
+
+        const data = await response.json();
+
+        if (!data.success) return;
+
+        const post = data.post;
+
+        // Populate the form
+
+        document.getElementById("campaignName").value =
+            post.campaignName || "";
+
+        document.getElementById("topic").value =
+            post.topic || "";
+
+        document.getElementById("context").value =
+            post.context || "";
+
+        document.getElementById("tone").value =
+            post.tone || "";
+
+        document.getElementById("targetAudience").value =
+            post.targetAudience || "";
+
+        keywords = post.keywords || [];
+        renderTags();
+        updatePreview();
+
+        document.getElementById("additionalNotes").value =
+            post.additionalNotes || "";
+
+    } catch (error) {
+
+        console.error(error);
+
+    }
+
+    }
+
     const updatePreviewHashtags = () => {
         if (keywords.length === 0) {
             prevHashtags.textContent = "#hashtags";
@@ -283,38 +352,121 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 500); // 500ms debounce
     };
 
-    const loadDraft = () => {
-        const savedData = localStorage.getItem('contentForgeDraft');
+    // const loadDraft = () => {
+    //     const savedData = localStorage.getItem('contentForgeDraft');
         
-        if (savedData) {
-            try {
-                const draft = JSON.parse(savedData);
+    //     if (savedData) {
+    //         try {
+    //             const draft = JSON.parse(savedData);
                 
-                inputCampaign.value = draft.campaignName || '';
-                inputTopic.value = draft.topic || '';
-                inputContext.value = draft.context || '';
-                selectTone.value = draft.tone || 'Professional';
-                inputTarget.value = draft.targetAudience || '';
-                inputNotes.value = draft.notes || '';
+    //             inputCampaign.value = draft.campaignName || '';
+    //             inputTopic.value = draft.topic || '';
+    //             inputContext.value = draft.context || '';
+    //             selectTone.value = draft.tone || 'Professional';
+    //             inputTarget.value = draft.targetAudience || '';
+    //             inputNotes.value = draft.notes || '';
                 
-                if (Array.isArray(draft.keywords)) {
-                    keywords = draft.keywords;
-                    renderTags();
-                }
+    //             if (Array.isArray(draft.keywords)) {
+    //                 keywords = draft.keywords;
+    //                 renderTags();
+    //             }
 
-                updatePreview(); // Trigger UI updates
-                console.log("Draft restored:",draft.lastSaved || "Unknown");
+    //             updatePreview(); // Trigger UI updates
+    //             console.log("Draft restored:",draft.lastSaved || "Unknown");
                 
-            } catch (e) {
-                console.error("Error loading draft data", e);
-            }
-        }
-    };
+    //         } catch (e) {
+    //             console.error("Error loading draft data", e);
+    //         }
+    //     }
+    // };
 
 
     // -------------------------------------------------------------
     // 4. Action Buttons
     // -------------------------------------------------------------
+    async function generateAICaptions(postId) {
+
+    const token = localStorage.getItem("token");
+
+    const response = await fetch(
+
+        `http://localhost:5000/api/ai/${postId}/generate-caption`,
+
+        {
+            method: "POST",
+
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        }
+
+    );
+
+    return await response.json();
+
+   }
+
+let generatedCaptions = [];
+
+let generatedHashtags = [];
+
+function renderCaptions(ai) {
+
+    generatedCaptions = ai.captions;
+
+    generatedHashtags = ai.hashtags;
+
+    document.getElementById("caption1").textContent =
+        ai.captions[0];
+
+    document.getElementById("caption2").textContent =
+        ai.captions[1];
+
+    document.getElementById("caption3").textContent =
+        ai.captions[2];
+
+    document.getElementById("generatedHashtags").textContent =
+        ai.hashtags.join(" ");
+
+}
+
+async function saveCaption(caption) {
+
+    const token = localStorage.getItem("token");
+
+    const postId = localStorage.getItem("currentPostId");
+
+    const response = await fetch(
+
+        `http://localhost:5000/api/ai/${postId}/save-caption`,
+
+        {
+
+            method: "PUT",
+
+            headers: {
+
+                "Content-Type": "application/json",
+
+                Authorization: `Bearer ${token}`
+
+            },
+
+            body: JSON.stringify({
+
+                caption,
+
+                hashtags: generatedHashtags
+
+            })
+
+        }
+
+    );
+
+    return await response.json();
+
+  }
     btnGenerate.addEventListener("click", async (e) => {
 
     e.preventDefault();
@@ -333,40 +485,83 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 try {
+    const postData = {
 
-    const response = await fetch("http://localhost:5000/api/posts", {
+    campaignName: inputCampaign.value,
 
-        method: "POST",
+    topic: inputTopic.value,
 
-        headers: {
+    context: inputContext.value,
 
-            "Content-Type": "application/json",
+    tone: selectTone.value,
 
-            Authorization: `Bearer ${token}`
+    targetAudience: inputTarget.value,
 
-        },
+    keywords: keywords,
 
-        body: JSON.stringify({
+    additionalNotes: inputNotes.value
 
-            campaignName: inputCampaign.value,
+   };
+   
+    const currentPostId = localStorage.getItem("currentPostId");
 
-            topic: inputTopic.value,
+    let response;
 
-            context: inputContext.value,
+    if (currentPostId) {
 
-            tone: selectTone.value,
+    response = await fetch(
 
-            targetAudience: inputTarget.value,
+        `http://localhost:5000/api/posts/${currentPostId}`,
 
-            keywords,
+        {
+            method: "PUT",
 
-            additionalNotes: inputNotes.value
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`
+            },
 
-        })
+            body: JSON.stringify(postData)
 
-    });
+        }
+
+    );
+
+    } else {
+
+    response = await fetch(
+
+        "http://localhost:5000/api/posts",
+
+        {
+            method: "POST",
+
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`
+            },
+
+            body: JSON.stringify(postData)
+
+        }
+
+      );
+
+    }
 
     const data = await response.json();
+
+    if (!currentPostId) {
+
+    localStorage.setItem(
+
+        "currentPostId",
+
+        data.post._id
+
+    );
+
+  }
 
     console.log(data);
 
@@ -384,6 +579,36 @@ try {
     );
 
     console.log("Current Post ID:", data.post._id);
+
+    btnGenerate.disabled = true;
+
+    btnGenerate.innerHTML = "Generating...";
+
+    //getting the  ai  response
+    const postId = localStorage.getItem("currentPostId");
+
+    const ai = await generateAICaptions(postId);
+
+    if(!ai.success){
+
+    alert("Caption generation failed.");
+
+    return;
+
+    }
+
+    renderCaptions(ai);
+
+    btnGenerate.disabled = false;
+
+    btnGenerate.innerHTML = `
+    Generate Caption
+    <svg viewBox="0 0 24 24" width="20" height="20"
+    fill="none" stroke="currentColor" stroke-width="2">
+    <line x1="5" y1="12" x2="19" y2="12"></line>
+    <polyline points="12 5 19 12 12 19"></polyline>
+    </svg>
+    `;
 
     document.getElementById("step1").style.display = "none";
 
@@ -445,6 +670,29 @@ try {
                 "click",
                 backToStep1
             );
+
+
+const useCaptionButtons = document.querySelectorAll(".use-caption");
+
+    useCaptionButtons.forEach((button, index) => {
+    button.addEventListener("click", async () => {
+
+        const result = await saveCaption(
+            generatedCaptions[index]
+        );
+
+        if (!result.success) {
+            alert("Failed to save caption.");
+            return;
+        }
+        alert("Caption saved successfully!");
+
+        console.log(result.post);
+
+        // Step 3 will be opened here later
+    });
+
+  });
     // Initialize Page
     loadDraft();
 });

@@ -128,6 +128,8 @@ document.addEventListener('DOMContentLoaded', () => {
             document.getElementById("scheduledCount").textContent = scheduled ;
             document.getElementById("readyCount").textContent = ready;
             document.getElementById("postedCount").textContent = posted;
+
+            renderRecentPosts(posts);
                     }
             catch(error){
                 console.error(error);
@@ -135,4 +137,70 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
         loadDashboard();
+
+
+    function renderRecentPosts(posts) {
+
+    const container =
+        document.getElementById(
+            "recentPostsContainer"
+        );
+
+    if (posts.length === 0) {
+
+        container.innerHTML = `
+
+            <h4>No Drafts Yet</h4>
+
+        `;
+
+        return;
+
+    }
+
+    container.innerHTML = "" ;
+
+    posts.forEach(post => {
+
+    const card = document.createElement("div");
+
+    card.className = "draft-card";
+
+    card.innerHTML = `
+
+        <h4>${post.campaignName}</h4>
+
+        <p>${post.topic}</p>
+
+        <p>Status : ${post.status}</p>
+
+        <button
+            class="continue-btn"
+            data-id="${post._id}"
+        >
+            Continue Editing
+        </button>
+
+        <hr>
+
+    `;
+
+    container.appendChild(card);
+    
+    const continueBtn = card.querySelector(".continue-btn");
+
+    continueBtn.addEventListener("click", () => {
+
+    localStorage.setItem(
+
+        "currentPostId",post._id
+
+    );
+
+    window.location.href = "create-post.html";
+
+    });
+
+    });
+  }
 });
