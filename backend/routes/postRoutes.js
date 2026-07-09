@@ -6,7 +6,7 @@ const authMiddleware = require("../middleware/authMiddleware");
 
 const {
 
-    createPost , getPost ,updatePost , getPosts
+    createPost , getPost ,updatePost , getPosts ,generateCaption
 
 } = require("../controllers/postController");
 
