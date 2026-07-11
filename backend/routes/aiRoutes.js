@@ -6,7 +6,7 @@ const authMiddleware = require("../middleware/authMiddleware");
 
 const {
 
-     generateCaption ,saveCaption
+     generateCaption ,saveCaption ,generatePostImage ,saveImage , generateMusicController ,saveMusic
 
 } = require("../controllers/aiController");
 
@@ -25,4 +25,24 @@ router.put(
     saveCaption
 
 );
+
+router.post(
+
+    "/:id/generate-image",
+
+    authMiddleware,
+
+    generatePostImage
+
+);
+
+router.put(
+    "/:id/save-image",
+    authMiddleware,
+    saveImage
+);
+
+router.post("/:id/generate-music",authMiddleware,generateMusicController);
+
+router.put("/:id/save-music",authMiddleware,saveMusic);
 module.exports = router;

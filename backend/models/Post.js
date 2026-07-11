@@ -50,6 +50,21 @@ const postSchema = new mongoose.Schema(
     hashtags: [{
         type: String
     }],
+    
+    imagePrompt: {
+            type: String,
+            default: ""
+        },
+
+        imageUrl: {
+            type: String,
+            default: ""
+        },
+
+        music: {
+            type: String,
+            default: ""
+        },
 
     status: {
         type: String,

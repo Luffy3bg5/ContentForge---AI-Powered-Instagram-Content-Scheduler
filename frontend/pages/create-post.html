@@ -282,25 +282,18 @@
               <section id="step2" style="display:none;">
 
                     <div class="card form-card">
-
                         <div class="card-header-flex">
-
                             <div>
-
                                 <h2>AI Caption Generation</h2>
-
                                 <p class="text-secondary">
                                     Choose your favorite AI generated caption.
                                 </p>
-
                             </div>
 
                             <button
                                 class="btn btn-outline"
                                 id="btnBackStep1">
-
                                 ← Back
-
                             </button>
 
                         </div>
@@ -326,33 +319,24 @@
                             <div class="caption-card">
 
                                 <h4>Option 2</h4>
-
                                 <p id="caption2">
                                     Every successful morning starts with the perfect cup of coffee.
                                 </p>
 
                                 <button class="btn btn-primary use-caption">
-
                                     Use Caption
-
                                 </button>
-
                             </div>
 
                             <div class="caption-card">
-
                                 <h4>Option 3</h4>
-
                                 <p id="caption3">
                                     Brew your dreams one cup at a time ☕
                                 </p>
 
                                 <button class="btn btn-primary use-caption">
-
                                     Use Caption
-
                                 </button>
-
                             </div>
 
                         </div>
@@ -360,19 +344,14 @@
                         <div class="hashtags-card">
 
                             <h3>
-
                                 Suggested Hashtags
-
                             </h3>
-
                             <div id="generatedHashtags">
-
                                 #coffee
                                 #latte
                                 #morning
                                 #cafe
                                 #productivity
-
                             </div>
 
                             <div class="hashtags-actions">
@@ -380,21 +359,15 @@
                                 <button
                                     class="btn btn-secondary"
                                     id="btnCopyTags">
-
                                     Copy
-
                                 </button>
 
                                 <button
                                     class="btn btn-outline"
                                     id="btnRegenerate">
-
                                     Regenerate
-
                                 </button>
-
                             </div>
-
                         </div>
 
                         <div class="action-footer">
@@ -402,17 +375,13 @@
                             <button
                                 class="btn btn-outline"
                                 id="btnBackStep1Bottom">
-
                                 ← Back
-
                             </button>
 
                             <button
                                 class="btn btn-primary"
-                                id="btnGenerateImage">
-
+                                id="btnGoToImage">
                                 Generate Image →
-
                             </button>
 
                         </div>
@@ -420,6 +389,133 @@
                     </div>
 
                 </section>
+            
+              <section id="step3" style="display:none;">
+
+                    <div class="card form-card">
+
+                        <div class="card-header-flex">
+                            <div>
+                                <h2>AI Image Generation</h2>
+                                <p class="text-secondary">
+                                    Generate an AI image for your Instagram post.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div
+                            style="
+                                display:flex;
+                                justify-content:center;
+                                margin:40px 0;">
+
+                            <img
+                                id="generatedImage"
+                                src=""
+                                alt="Generated Image"
+                                style="
+                                    max-width:500px;
+                                    width:100%;
+                                    border-radius:16px;
+                                    display:none;
+                                    box-shadow:0 10px 30px rgba(0,0,0,.15);
+                                "
+                            >
+                        </div>
+
+                        <div
+                            style="
+                                display:flex;
+                                justify-content:center;
+                                gap:16px;"
+                        >
+                            <button
+                                class="btn btn-primary"
+                                id="btnGenerateImage">
+                                Generate Image
+                            </button>
+
+                            <button
+                                class="btn btn-success"
+                                id="btnUseImage"
+                                style="display:none;">
+                                Use Image
+                            </button>
+                        </div>
+                    </div>
+
+                </section>
+
+              <section id="step4" style="display:none;">
+
+                <div class="card form-card">
+                    <div class="card-header-flex">
+                        <div>
+                            <h2>AI Music Recommendation</h2>
+                            <p class="text-secondary">
+                                Pick a song that matches your content.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="music-options">
+                        <div class="caption-card">
+                            <h4>Option 1</h4>
+                            <p id="song1"></p>
+                            <button class="btn btn-primary use-song">
+                                Use Song
+                            </button>
+                        </div>
+
+                        <div class="caption-card">
+                            <h4>Option 2</h4>
+                            <p id="song2"></p>
+                            <button class="btn btn-primary use-song">
+                                Use Song
+                            </button>
+                        </div>
+
+                        <div class="caption-card">
+                            <h4>Option 3</h4>
+                            <p id="song3"></p>
+                            <button class="btn btn-primary use-song">
+                                Use Song
+                            </button>
+                        </div>
+
+                        <div class="caption-card">
+                            <h4>Option 4</h4>
+                            <p id="song4"></p>
+                            <button class="btn btn-primary use-song">
+                                Use Song
+                            </button>
+                        </div>
+
+                        <div class="caption-card">
+                            <h4>Option 5</h4>
+                            <p id="song5"></p>
+                            <button class="btn btn-primary use-song">
+                                Use Song
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                    <div class="action-footer">
+
+                        <button
+                            class="btn btn-primary"
+                            id="btnGenerateMusic">
+
+                            Generate Music
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </section>
             </div>
         </main>
     </div>

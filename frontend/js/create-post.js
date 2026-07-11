@@ -4,7 +4,7 @@
  */
 
 document.addEventListener('DOMContentLoaded', () => {
-    
+
     // Elements - Form
     const form = document.getElementById('createContentForm');
     const inputCampaign = document.getElementById('campaignName');
@@ -14,6 +14,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const inputTarget = document.getElementById('targetAudience');
     const inputNotes = document.getElementById('additionalNotes');
     const btnGenerate = document.getElementById('btnGenerateCaption');
+    const btnGoToImage = document.getElementById("btnGoToImage");
+    const btnGenerateImage = document.getElementById("btnGenerateImage");
+    const generatedImage = document.getElementById("generatedImage");
+    const btnUseImage = document.getElementById("btnUseImage");
+
     const btnBackStep1 = document.getElementById("btnBackStep1");
     const btnBackStep1Bottom = document.getElementById("btnBackStep1Bottom");
     
@@ -32,7 +37,6 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Elements - UI Indicators
     const autosaveIndicator = document.getElementById('autosaveIndicator');
-
     // -------------------------------------------------------------
     // 1. Tag Input Logic
     // -------------------------------------------------------------
@@ -76,32 +80,20 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     async function loadDraft() {
-    
     const token = localStorage.getItem("token");
     const postId = localStorage.getItem(
-
         "currentPostId"
-
     );
 
     if (!postId) return;
-
     try {
-
         const response = await fetch(
-
             `http://localhost:5000/api/posts/${postId}`,
-
             {
-
                 headers: {
-
                     Authorization:
-
                         `Bearer ${token}`
-
                 }
-
             }
 
         );
@@ -209,21 +201,17 @@ document.addEventListener('DOMContentLoaded', () => {
     if (element === inputTopic) {
 
         if (value.length < 2) {
-
             group.classList.add("has-error");
             error.textContent =
                 "Topic should be at least 2 characters.";
-
             isValid = false;
             return;
         }
 
         if (value.length > 40) {
-
             group.classList.add("has-error");
             error.textContent =
                 "Topic cannot exceed 40 characters.";
-
             isValid = false;
             return;
         }
@@ -238,21 +226,17 @@ document.addEventListener('DOMContentLoaded', () => {
             group.classList.add("has-error");
             error.textContent =
                 "Please provide more context for better AI results.";
-
             isValid = false;
             return;
         }
 
         if (value.length > 2200) {
-
             group.classList.add("has-error");
             error.textContent =
                 "Instagram captions support a maximum of 2200 characters.";
-
             isValid = false;
             return;
         }
-
     }
 
     group.classList.remove("has-error");
@@ -261,9 +245,7 @@ document.addEventListener('DOMContentLoaded', () => {
 };
 
         checkField(inputCampaign,"Campaign name is required.");
-
         checkField(inputTopic,"Topic is required.");
-
         checkField(inputContext,"Context is required.");
 
         // Toggle button state
@@ -313,11 +295,8 @@ document.addEventListener('DOMContentLoaded', () => {
     selectTone.addEventListener("change", () => {
 
     updatePreview();
-
     triggerAutosave();
-
     });
-
 
     // -------------------------------------------------------------
     // 3. Autosave Logic (localStorage)
@@ -340,7 +319,7 @@ document.addEventListener('DOMContentLoaded', () => {
             };
 
             localStorage.setItem('contentForgeDraft', JSON.stringify(draftData));
-            
+    
             // Show Indicator
             autosaveIndicator.classList.add('visible');
             
@@ -351,35 +330,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         }, 500); // 500ms debounce
     };
-
-    // const loadDraft = () => {
-    //     const savedData = localStorage.getItem('contentForgeDraft');
-        
-    //     if (savedData) {
-    //         try {
-    //             const draft = JSON.parse(savedData);
-                
-    //             inputCampaign.value = draft.campaignName || '';
-    //             inputTopic.value = draft.topic || '';
-    //             inputContext.value = draft.context || '';
-    //             selectTone.value = draft.tone || 'Professional';
-    //             inputTarget.value = draft.targetAudience || '';
-    //             inputNotes.value = draft.notes || '';
-                
-    //             if (Array.isArray(draft.keywords)) {
-    //                 keywords = draft.keywords;
-    //                 renderTags();
-    //             }
-
-    //             updatePreview(); // Trigger UI updates
-    //             console.log("Draft restored:",draft.lastSaved || "Unknown");
-                
-    //         } catch (e) {
-    //             console.error("Error loading draft data", e);
-    //         }
-    //     }
-    // };
-
 
     // -------------------------------------------------------------
     // 4. Action Buttons
@@ -406,11 +356,32 @@ document.addEventListener('DOMContentLoaded', () => {
 
    }
 
-let generatedCaptions = [];
+   async function generateImage() {
 
-let generatedHashtags = [];
+        const token = localStorage.getItem("token");
+        const postId = localStorage.getItem("currentPostId");
 
-function renderCaptions(ai) {
+        const response = await fetch(
+            `http://localhost:5000/api/ai/${postId}/generate-image`,
+            {
+                method: "POST",
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            }
+    );
+
+    return await response.json();
+
+   }
+
+    let generatedCaptions = [];
+    let generatedHashtags = [];
+    let generatedImageUrl = "";
+    let generatedImagePrompt = "";
+    let generatedSongs = [];
+
+    function renderCaptions(ai) {
 
     generatedCaptions = ai.captions;
 
@@ -433,30 +404,100 @@ function renderCaptions(ai) {
 async function saveCaption(caption) {
 
     const token = localStorage.getItem("token");
+    const postId = localStorage.getItem("currentPostId");
+    const response = await fetch(
+        `http://localhost:5000/api/ai/${postId}/save-caption`,
+        {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`
+            },
+            body: JSON.stringify({
+                caption,
+                hashtags: generatedHashtags
+            })
+        }
+    );
+    return await response.json();
+        }
+
+async function saveImage() {
+
+            const token = localStorage.getItem("token");
+            const postId = localStorage.getItem("currentPostId");
+
+            const response = await fetch(
+                `http://localhost:5000/api/ai/${postId}/save-image`,
+                {
+                    method: "PUT",
+                    headers: {
+                        "Content-Type":"application/json",
+                        Authorization:`Bearer ${token}`
+                    },
+                    body: JSON.stringify({
+                        imageUrl: generatedImageUrl,
+                        imagePrompt: generatedImagePrompt
+                    })
+                }
+            );
+
+            return await response.json();
+
+        }
+async function generateMusic() {
+
+    const token = localStorage.getItem("token");
 
     const postId = localStorage.getItem("currentPostId");
 
     const response = await fetch(
 
-        `http://localhost:5000/api/ai/${postId}/save-caption`,
+        `http://localhost:5000/api/ai/${postId}/generate-music`,
 
         {
 
-            method: "PUT",
+            method:"POST",
 
-            headers: {
+            headers:{
 
-                "Content-Type": "application/json",
+                Authorization:`Bearer ${token}`
 
-                Authorization: `Bearer ${token}`
+            }
+
+        }
+
+    );
+
+    return await response.json();
+
+}
+
+async function saveMusic(song){
+
+    const token = localStorage.getItem("token");
+
+    const postId = localStorage.getItem("currentPostId");
+
+    const response = await fetch(
+
+        `http://localhost:5000/api/ai/${postId}/save-music`,
+
+        {
+
+            method:"PUT",
+
+            headers:{
+
+                "Content-Type":"application/json",
+
+                Authorization:`Bearer ${token}`
 
             },
 
-            body: JSON.stringify({
+            body:JSON.stringify({
 
-                caption,
-
-                hashtags: generatedHashtags
+                music:song
 
             })
 
@@ -466,11 +507,97 @@ async function saveCaption(caption) {
 
     return await response.json();
 
-  }
+}
+
+const useSongButtons =
+document.querySelectorAll(".use-song");
+
+useSongButtons.forEach((button,index)=>{
+
+    button.addEventListener("click",async()=>{
+
+        const result = await saveMusic(
+
+            generatedSongs[index]
+
+        );
+
+        if(!result.success){
+
+            alert("Failed to save music.");
+
+            return;
+
+        }
+
+        alert("Music saved successfully!");
+
+        document.getElementById("step4").style.display="none";
+
+        document.getElementById("step5").style.display="block";
+
+        document
+            .getElementById("progressStep4")
+            .classList.remove("active");
+
+        document
+            .getElementById("progressStep5")
+            .classList.add("active");
+
+    });
+
+});
+
+function renderSongs(ai){
+
+    generatedSongs = ai.songs;
+
+    document.getElementById("song1").textContent = ai.songs[0];
+
+    document.getElementById("song2").textContent = ai.songs[1];
+
+    document.getElementById("song3").textContent = ai.songs[2];
+
+    document.getElementById("song4").textContent = ai.songs[3];
+
+    document.getElementById("song5").textContent = ai.songs[4];
+
+}
+
+btnUseImage.addEventListener("click", async () => {
+
+                const result = await saveImage();
+
+                if(!result.success){
+                    alert("Failed to save image.");
+                    return;
+                }
+
+                alert("Image saved successfully!");
+                document.getElementById("step3").style.display = "none";
+
+                document.getElementById("step4").style.display = "block";
+
+                // Update progress bar
+                document
+                    .getElementById("progressStep3")
+                    .classList.remove("active");
+
+                document
+                    .getElementById("progressStep4")
+                    .classList.add("active");
+
+                console.log(result.post);
+
+                // Move to Music Step here later
+
+            });
+
+
     btnGenerate.addEventListener("click", async (e) => {
 
     e.preventDefault();
-
+ console.log("Generate Caption button clicked");
     if (!validateFields()) return;
 
     const token = localStorage.getItem("token");
@@ -488,17 +615,11 @@ try {
     const postData = {
 
     campaignName: inputCampaign.value,
-
     topic: inputTopic.value,
-
     context: inputContext.value,
-
     tone: selectTone.value,
-
     targetAudience: inputTarget.value,
-
     keywords: keywords,
-
     additionalNotes: inputNotes.value
 
    };
@@ -508,21 +629,15 @@ try {
     let response;
 
     if (currentPostId) {
-
     response = await fetch(
-
         `http://localhost:5000/api/posts/${currentPostId}`,
-
         {
             method: "PUT",
-
             headers: {
                 "Content-Type": "application/json",
                 Authorization: `Bearer ${token}`
             },
-
             body: JSON.stringify(postData)
-
         }
 
     );
@@ -530,47 +645,32 @@ try {
     } else {
 
     response = await fetch(
-
         "http://localhost:5000/api/posts",
-
         {
             method: "POST",
-
             headers: {
                 "Content-Type": "application/json",
                 Authorization: `Bearer ${token}`
             },
-
             body: JSON.stringify(postData)
-
         }
-
       );
-
     }
 
     const data = await response.json();
 
     if (!currentPostId) {
-
     localStorage.setItem(
-
         "currentPostId",
-
         data.post._id
-
     );
-
   }
 
     console.log(data);
 
     if (!data.success) {
-
         alert(data.message);
-
         return;
-
     }
 
     localStorage.setItem(
@@ -579,9 +679,7 @@ try {
     );
 
     console.log("Current Post ID:", data.post._id);
-
     btnGenerate.disabled = true;
-
     btnGenerate.innerHTML = "Generating...";
 
     //getting the  ai  response
@@ -590,17 +688,13 @@ try {
     const ai = await generateAICaptions(postId);
 
     if(!ai.success){
-
     alert("Caption generation failed.");
-
     return;
-
     }
 
     renderCaptions(ai);
 
     btnGenerate.disabled = false;
-
     btnGenerate.innerHTML = `
     Generate Caption
     <svg viewBox="0 0 24 24" width="20" height="20"
@@ -614,13 +708,9 @@ try {
 
     document.getElementById("step2").style.display = "block";
 
-    document
-        .getElementById("progressStep1")
-        .classList.remove("active");
+    document.getElementById("progressStep1").classList.remove("active");
 
-    document
-        .getElementById("progressStep2")
-        .classList.add("active");
+    document.getElementById("progressStep2").classList.add("active");
 
 } catch (error) {
 
@@ -633,6 +723,36 @@ try {
 
 });
 
+const btnGenerateMusic =
+document.getElementById("btnGenerateMusic");
+
+btnGenerateMusic.addEventListener("click", async ()=>{
+
+    btnGenerateMusic.disabled = true;
+
+    btnGenerateMusic.textContent = "Generating...";
+
+    const result = await generateMusic();
+
+    if(!result.success){
+
+        alert("Music generation failed.");
+
+        btnGenerateMusic.disabled = false;
+
+        btnGenerateMusic.textContent = "Generate Music";
+
+        return;
+
+    }
+
+    renderSongs(result);
+
+    btnGenerateMusic.disabled = false;
+
+    btnGenerateMusic.textContent = "Generate Music";
+
+});
     // Add Keyframe for spinner dynamically just in case it's not in CSS
     if (!document.getElementById('spinner-style')) {
         const style = document.createElement('style');
@@ -686,6 +806,21 @@ const useCaptionButtons = document.querySelectorAll(".use-caption");
             return;
         }
         alert("Caption saved successfully!");
+        // Move to Step 3
+
+            document.getElementById("step2").style.display = "none";
+
+            document.getElementById("step3").style.display = "block";
+
+            // Update progress indicator
+
+            document
+                .getElementById("progressStep2")
+                .classList.remove("active");
+
+            document
+                .getElementById("progressStep3")
+                .classList.add("active");
 
         console.log(result.post);
 
@@ -693,6 +828,29 @@ const useCaptionButtons = document.querySelectorAll(".use-caption");
     });
 
   });
+
+    btnGenerateImage.addEventListener("click",
+    async () => {
+        console.log("button  clicked ");
+        
+        const image = await generateImage();
+
+        if (!image.success) {
+            alert("Image generation failed.");
+            return;
+        }
+
+        generatedImageUrl = image.imageUrl;
+
+        generatedImagePrompt = image.imagePrompt;
+
+        generatedImage.src = generatedImageUrl;
+
+        generatedImage.style.display = "block";
+
+        btnUseImage.style.display = "inline-flex";
+    }
+);
     // Initialize Page
     loadDraft();
 });

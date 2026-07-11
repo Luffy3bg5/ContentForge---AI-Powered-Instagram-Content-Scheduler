@@ -1,10 +1,8 @@
-const {
-
-    generateCaptions
-
-} = require("../services/geminiService");
+const { generateCaptions , generateMusic } =require("../services/geminiService");
 
 const Post = require("../models/Post");
+
+const { generateImage } = require("../services/imageService");
 
 const generateCaption = async(req , res)=>{
     try {
@@ -35,11 +33,11 @@ const generateCaption = async(req , res)=>{
 
         }
 
-        const  aiResponse = await  generateCaptions(post) ;
+    const  aiResponse = await  generateCaptions(post) ;
 
         //Gemini may  return JSON inside  ```json 
 
-        const  cleaned = aiResponse
+    const  cleaned = aiResponse
             .replace(/```json/g, "")
             .replace(/```/g, "")
             .trim();
@@ -127,4 +125,244 @@ const saveCaption = async (req, res) => {
 
     };
 
-module.exports = { generateCaption , saveCaption} ;
+const saveImage = async (req, res) => {
+
+    try {
+
+        const post = await Post.findById(req.params.id);
+
+        if (!post) {
+            return res.status(404).json({
+                success:false,
+                message:"Post not found."
+            });
+        }
+
+        if(post.user.toString() !== req.user){
+            return res.status(403).json({
+                success:false,
+                message:"Access denied."
+            });
+        }
+
+        post.imageUrl = req.body.imageUrl;
+        post.imagePrompt = req.body.imagePrompt;
+
+        await post.save();
+
+        res.status(200).json({
+            success:true,
+            message:"Image saved.",
+            post
+        });
+
+    } catch(err){
+
+        console.error(err);
+
+        res.status(500).json({
+            success:false,
+            message:"Server Error"
+        });
+
+    }
+
+};
+const generatePostImage = async (req, res) => {
+
+    try {
+
+        const post = await Post.findById(req.params.id);
+
+        if (!post) {
+
+            return res.status(404).json({
+
+                success: false,
+
+                message: "Post not found."
+
+            });
+
+        }
+
+        if (post.user.toString() !== req.user) {
+
+            return res.status(403).json({
+
+                success: false,
+
+                message: "Access denied."
+
+            });
+
+        }
+
+        const imagePrompt = `
+                Create a realistic Instagram image.
+
+                Campaign:
+                ${post.campaignName}
+
+                Topic:
+                ${post.topic}
+
+                Context:
+                ${post.context}
+
+                Tone:
+                ${post.tone}
+
+                Caption:
+                ${post.caption}
+                `;
+
+        const imageUrl =
+            await generateImage(imagePrompt);
+
+        res.status(200).json({
+
+            success: true,
+
+            imagePrompt,
+
+            imageUrl
+
+        });
+
+    }
+
+    catch (error) {
+
+        console.error(error);
+
+        res.status(500).json({
+
+            success: false,
+
+            message: "Image generation failed."
+
+        });
+
+    }
+
+};
+
+const generateMusicController = async (req, res) => {
+
+    try {
+
+        const post = await Post.findById(req.params.id);
+
+        if (!post) {
+
+            return res.status(404).json({
+                success: false,
+                message: "Post not found."
+            });
+
+        }
+
+        if (post.user.toString() !== req.user) {
+
+            return res.status(403).json({
+                success: false,
+                message: "Access denied."
+            });
+
+        }
+
+        const aiResponse = await generateMusic(post);
+
+        const cleaned = aiResponse
+            .replace(/```json/g, "")
+            .replace(/```/g, "")
+            .trim();
+
+        const result = JSON.parse(cleaned);
+
+        res.status(200).json({
+
+            success: true,
+
+            songs: result.songs
+
+        });
+
+    } catch (error) {
+
+        console.error(error);
+
+        res.status(500).json({
+
+            success: false,
+
+            message: "Music generation failed."
+
+        });
+
+    }
+
+};
+
+const saveMusic = async (req, res) => {
+
+    try {
+
+        const post = await Post.findById(req.params.id);
+
+        if (!post) {
+
+            return res.status(404).json({
+
+                success: false,
+
+                message: "Post not found."
+
+            });
+
+        }
+
+        if (post.user.toString() !== req.user) {
+
+            return res.status(403).json({
+
+                success: false,
+
+                message: "Access denied."
+
+            });
+
+        }
+
+        post.music = req.body.music;
+
+        await post.save();
+
+        res.status(200).json({
+
+            success: true,
+
+            message: "Music saved.",
+
+            post
+
+        });
+
+    } catch (error) {
+
+        console.error(error);
+
+        res.status(500).json({
+
+            success: false,
+
+            message: "Server Error"
+
+        });
+
+    }
+
+};
+
+module.exports = { generateCaption , saveCaption , generatePostImage , saveImage  ,generateMusicController ,saveMusic} ;
