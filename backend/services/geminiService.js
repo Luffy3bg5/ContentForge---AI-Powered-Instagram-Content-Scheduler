@@ -79,14 +79,18 @@ const generateMusic = async (post) => {
         Example:
 
         {
-            "songs":[
-                "Espresso - Sabrina Carpenter",
-                "Golden Hour - JVKE",
-                "Sunflower - Post Malone",
-                "Birds of a Feather - Billie Eilish",
-                "Calm Down - Rema"
-            ]
+        "songs":[
+            {
+            "title":"Espresso",
+            "artist":"Sabrina Carpenter"
+            },
+            {
+            "title":"Golden Hour",
+            "artist":"JVKE"
+            }
+           ]
         }
+        
     `;
 
     const response = await ai.models.generateContent({

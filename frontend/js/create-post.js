@@ -121,12 +121,13 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById("targetAudience").value =
             post.targetAudience || "";
 
-        keywords = post.keywords || [];
-        renderTags();
-        updatePreview();
-
         document.getElementById("additionalNotes").value =
             post.additionalNotes || "";
+
+        keywords = post.keywords || [];
+        
+            renderTags();
+            updatePreview();
 
     } catch (error) {
 
@@ -344,7 +345,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         {
             method: "POST",
-
             headers: {
                 Authorization: `Bearer ${token}`
             }
@@ -445,6 +445,7 @@ async function saveImage() {
             return await response.json();
 
         }
+
 async function generateMusic() {
 
     const token = localStorage.getItem("token");
@@ -517,7 +518,7 @@ useSongButtons.forEach((button,index)=>{
     button.addEventListener("click",async()=>{
 
         const result = await saveMusic(
-
+            
             generatedSongs[index]
 
         );
@@ -552,17 +553,54 @@ function renderSongs(ai){
 
     generatedSongs = ai.songs;
 
-    document.getElementById("song1").textContent = ai.songs[0];
+    document.getElementById("song1").textContent =
+   `${ai.songs[0].title} — ${ai.songs[0].artist}`;
 
-    document.getElementById("song2").textContent = ai.songs[1];
+   document.getElementById("song2").textContent =
+   `${ai.songs[1].title} — ${ai.songs[1].artist}`;
 
-    document.getElementById("song3").textContent = ai.songs[2];
+    document.getElementById("song3").textContent =
+    `${ai.songs[2].title} — ${ai.songs[2].artist}`;
 
-    document.getElementById("song4").textContent = ai.songs[3];
+    document.getElementById("song4").textContent =
+    `${ai.songs[3].title} — ${ai.songs[3].artist}`;
 
-    document.getElementById("song5").textContent = ai.songs[4];
+    document.getElementById("song5").textContent =
+    `${ai.songs[4].title} — ${ai.songs[4].artist}`;
 
 }
+
+const listenButtons =
+document.querySelectorAll(".listen-song");
+
+listenButtons.forEach((button,index)=>{
+
+    button.addEventListener("click", async ()=>{
+    const song =
+         `${generatedSongs[index].title} ${generatedSongs[index].artist} official audio `;
+
+    const token = localStorage.getItem("token");
+
+    const response = await fetch(
+        "http://localhost:5000/api/ai/youtube",
+        {
+        method:"POST",
+        headers:{
+        "Content-Type":"application/json",
+        Authorization:`Bearer ${token}`
+        },
+        body:JSON.stringify({
+        song
+        })
+        }
+        );
+
+        const data = await response.json();
+        window.open(data.url,"_blank");
+        button.innerHTML =  "Opened ✔️" ;
+    });
+
+});
 
 btnUseImage.addEventListener("click", async () => {
 
@@ -726,13 +764,17 @@ try {
 const btnGenerateMusic =
 document.getElementById("btnGenerateMusic");
 
+console.log("Music button found:", btnGenerateMusic);
 btnGenerateMusic.addEventListener("click", async ()=>{
 
+    console.log("Generate Music clicked");
     btnGenerateMusic.disabled = true;
 
     btnGenerateMusic.textContent = "Generating...";
 
     const result = await generateMusic();
+    console.log(result);
+    
 
     if(!result.success){
 
@@ -852,5 +894,7 @@ const useCaptionButtons = document.querySelectorAll(".use-caption");
     }
 );
     // Initialize Page
+
+    updatePreview() ;
     loadDraft();
 });

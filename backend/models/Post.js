@@ -56,14 +56,19 @@ const postSchema = new mongoose.Schema(
             default: ""
         },
 
-        imageUrl: {
+    imageUrl: {
             type: String,
             default: ""
         },
 
-        music: {
-            type: String,
-            default: ""
+    music: {
+            title :{
+                type : String ,
+            },
+            artist :{
+                type : String ,
+                
+            }
         },
 
     status: {

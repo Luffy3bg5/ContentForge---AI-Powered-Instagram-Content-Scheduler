@@ -1,5 +1,7 @@
 const { generateCaptions , generateMusic } =require("../services/geminiService");
 
+const { searchYoutube } = require("../services/youtubeService");
+
 const Post = require("../models/Post");
 
 const { generateImage } = require("../services/imageService");
@@ -249,9 +251,9 @@ const generatePostImage = async (req, res) => {
 };
 
 const generateMusicController = async (req, res) => {
-
+        console.log("===== generateMusicController HIT =====");
     try {
-
+       
         const post = await Post.findById(req.params.id);
 
         if (!post) {
@@ -273,14 +275,20 @@ const generateMusicController = async (req, res) => {
         }
 
         const aiResponse = await generateMusic(post);
+        console.log(aiResponse);
 
         const cleaned = aiResponse
             .replace(/```json/g, "")
             .replace(/```/g, "")
             .trim();
 
+        console.log("Cleaned:");
+        console.log(cleaned);
+
         const result = JSON.parse(cleaned);
 
+        console.log("Parsed:");
+        console.log(result);
         res.status(200).json({
 
             success: true,
@@ -335,7 +343,10 @@ const saveMusic = async (req, res) => {
 
         }
 
-        post.music = req.body.music;
+        post.music ={
+            title : req.body.music.title ,
+            artist : req.body.music.artist
+        }
 
         await post.save();
 
@@ -365,4 +376,27 @@ const saveMusic = async (req, res) => {
 
 };
 
-module.exports = { generateCaption , saveCaption , generatePostImage , saveImage  ,generateMusicController ,saveMusic} ;
+const getYoutubeLink = async(req,res)=>{
+
+    try{
+
+        const {song}=req.body;
+        const url = await searchYoutube(song);
+
+        res.json({
+            success:true,
+            url
+        });
+
+    }
+
+    catch(err){
+        console.error(err);
+        res.status(500).json({
+            success:false
+        });
+
+    }
+
+}
+module.exports = { generateCaption , saveCaption , generatePostImage , saveImage  ,generateMusicController ,saveMusic ,getYoutubeLink} ;

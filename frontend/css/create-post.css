@@ -523,3 +523,13 @@ select.form-control {
     gap:15px;
 
 }
+
+.music-actions{
+
+    display:flex;
+
+    gap:12px;
+
+    margin-top:16px;
+
+}
